@@ -1,0 +1,110 @@
+syntax = "proto3";
+package handphone;
+
+service HandphoneService {
+    rpc GetHandphoneByQuery(GetHandphoneByQuery) returns (GetHandphoneByQueryResponse){}
+    rpc GetAllHandphone(Empty) returns (GetAllHandphone){}
+    rpc GetHandphone(GetHandphoneRequest) returns (GetHandphoneResponse){}
+}
+
+message Empty {
+
+}
+
+message GetAllHandphone {
+    repeated Handphone handphone = 1;
+}
+
+message GetHandphoneRequest {
+    string handphone_id = 1;
+}
+
+message GetHandphoneResponse {
+    Handphone handphone = 1;
+}
+
+message GetHandphoneByQuery {
+    Query query = 1;
+}
+
+
+message GetHandphoneByQueryResponse {
+    repeated Handphone handphone = 1;
+}
+
+message Query {
+    string type = 1;
+    string brand = 2;
+    string category = 3;
+    int32 lowest_price = 4;
+    int32 highest_price = 5;
+    SortBy sort_by = 6;
+}
+
+enum SortBy {
+    popular = 1;
+    newest = 2;
+    oldest = 3;
+    price_asc = 4;
+    price_desc = 5;
+}
+
+message Handphone {
+    string id = 1;
+    string name = 2;
+    Other other = 3;
+    Physics physics = 4;
+    Screen screen = 5;
+    Specification specification = 6;
+    int32 price = 7;
+    string brand = 8;
+    repeated string photos = 9;
+}
+
+message Physics {
+    Condition condition = 1;
+    bool completeness = 2;
+}
+
+enum Condition {
+    economic = 1;
+    standard = 2;
+    grease = 3;
+}
+
+
+message Screen {
+    string condition = 1;
+    bool cracked_outer = 2;
+    bool cracked_inner = 3;
+}
+
+message Other {
+    bool official = 1;
+    bool box = 2;
+    string color = 3;
+    int32 ram = 4;
+    int32 rom = 5;
+}
+
+message Specification {
+    bool photo_quality = 1;
+    bool charging_port = 2;
+    bool speaker = 3;
+    bool receiver = 4;
+    bool enabled = 5;
+    bool battery_physics = 6;
+    bool fingerprint = 7;
+    bool bluetooth = 8;
+    bool flashlight = 9;
+    bool sim = 10;
+    bool wifi = 11;
+    bool camera = 12;
+    bool back_button = 13;
+    bool power_button = 14;
+    bool home_button = 15;
+    bool volume_down_button = 16;
+    bool volume_up_button = 17;
+    bool touchscreen = 18;
+    bool sensors = 19;
+}

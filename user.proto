@@ -1,0 +1,88 @@
+syntax = "proto3";
+package user;
+
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginResponse {
+    string refresh_token = 1;
+    string access_token = 2;
+}
+
+message RegisterRequest {
+    string username = 1;
+    string name = 2;
+    string email = 3;
+    string password = 4;
+    string createdAt = 5;
+    string updatedAt = 6;
+}
+
+message RegisterResponse {
+    string refresh_token = 1;
+    string access_token = 2;
+}
+
+message SetUserDataRequest {
+    string user_id = 1;
+    Address address = 2;
+    Bank bank_account = 3;
+}
+
+message SetUserDataResponse {
+    Address address = 1;
+    Bank bank_account = 2;
+}
+
+message Bank {
+    string bank = 1;
+    string account = 2;
+  }
+  
+  message Address {
+    string address = 1;
+    string rt = 2;
+    string rw = 3;
+    string kelurahan = 4;
+    string kecamatan = 5;
+    string city = 6;
+    string province = 7;
+    string region = 8;
+  }
+
+  message GetUserDataRequest {
+    string user_id = 1;
+  }
+
+  message GetUserDataResponse {
+    Address address = 1;
+    Bank bank_account = 2;
+  }
+
+  message RefreshToken {
+    string refresh_token = 1;
+  }
+
+  message AccessToken {
+    string access_token = 1;
+  }
+
+  message Token {
+    string access_token = 1;
+  }
+
+  message IsVerified {
+    bool isVerified = 1;
+  }
+  
+
+service UserService {
+    rpc Login(LoginRequest) returns (LoginResponse);
+    rpc Register(RegisterRequest) returns (RegisterResponse);
+    rpc SetUserData(SetUserDataRequest) returns (SetUserDataResponse);
+    rpc GetUserData(GetUserDataRequest) returns (GetUserDataResponse);
+    rpc GenerateAccessToken(RefreshToken) returns (AccessToken);
+    rpc VerifyToken(Token) returns (IsVerified);
+}

@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package shipment;
+
+service ShipmentService {
+  rpc CreateShipment(CreateShipmentRequest) returns (CreateShipmentResponse);
+  rpc GetShipment(GetShipmentRequest) returns (GetShipmentResponse);
+}
+
+message CreateShipmentRequest {
+  string transaction_id = 1;
+  string address = 2;
+}
+
+message CreateShipmentResponse {
+  string shipment_id = 1;
+}
+
+message GetShipmentRequest {
+  string shipment_id = 1;
+}
+
+message GetShipmentResponse {
+  string shipment_id = 1;
+  string transaction_id = 2;
+  string address = 3;
+  string status = 4;
+}
